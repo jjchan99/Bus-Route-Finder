@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CDBusLookup" representedClassName="CDBusLookup" syncable="YES">
+        <attribute name="bus" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="busStop" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDVertex" inverseName="buses" inverseEntity="CDVertex"/>
+        <relationship name="route" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDRoute" inverseName="bus" inverseEntity="CDRoute"/>
+    </entity>
+    <entity name="CDBusRoutes" representedClassName="CDBusRoutes" syncable="YES">
+        <attribute name="busStopCode" optional="YES" attributeType="String"/>
+        <attribute name="direction" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="distance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="opr" optional="YES" attributeType="String"/>
+        <attribute name="satFirstBus" optional="YES" attributeType="String"/>
+        <attribute name="satLastBus" optional="YES" attributeType="String"/>
+        <attribute name="serviceNo" optional="YES" attributeType="String"/>
+        <attribute name="stopSequence" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sunFirstBus" optional="YES" attributeType="String"/>
+        <attribute name="sunLastBus" optional="YES" attributeType="String"/>
+        <attribute name="wdFirstBus" optional="YES" attributeType="String"/>
+        <attribute name="wdLastBus" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CDEdge" representedClassName="CDEdge" syncable="YES">
+        <attribute name="busNumber" optional="YES" attributeType="String"/>
+        <attribute name="destination" optional="YES" attributeType="String"/>
+        <attribute name="edgeWeight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="source" optional="YES" attributeType="String"/>
+        <relationship name="vertex" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDVertex" inverseName="edge" inverseEntity="CDVertex"/>
+    </entity>
+    <entity name="CDRoute" representedClassName="CDRoute" syncable="YES">
+        <attribute name="route1item" optional="YES" attributeType="String"/>
+        <attribute name="route2item" optional="YES" attributeType="String"/>
+        <attribute name="stopSequence" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="bus" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDBusLookup" inverseName="route" inverseEntity="CDBusLookup"/>
+    </entity>
+    <entity name="CDVertex" representedClassName="CDVertex" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="vertexLabel" optional="YES" attributeType="String"/>
+        <relationship name="buses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBusLookup" inverseName="busStop" inverseEntity="CDBusLookup"/>
+        <relationship name="edge" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDEdge" inverseName="vertex" inverseEntity="CDEdge"/>
+    </entity>
+    <elements>
+        <element name="CDBusLookup" positionX="-27" positionY="117" width="128" height="89"/>
+        <element name="CDBusRoutes" positionX="-27" positionY="18" width="128" height="224"/>
+        <element name="CDEdge" positionX="-18" positionY="126" width="128" height="104"/>
+        <element name="CDRoute" positionX="-18" positionY="117" width="128" height="89"/>
+        <element name="CDVertex" positionX="-27" positionY="117" width="128" height="89"/>
+    </elements>
+</model>
